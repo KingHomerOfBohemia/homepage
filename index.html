@@ -15,7 +15,7 @@
   body {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* zarovnání na spodek */
+    justify-content: flex-start; /* zarovnání na začátek */
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
@@ -53,6 +53,7 @@
   p {
     margin: 15px 0 0 0;
     font-size: 1.2rem;
+    margin-top: auto; /* posune celý obsah nahoru, p zůstane dole */
   }
   @media (max-width: 480px) {
     h1 {
