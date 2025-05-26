@@ -15,9 +15,10 @@
   body {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* zarovnání na začátek */
+    justify-content: flex-end; /* obsah dole */
     align-items: center;
     padding: 20px;
+    padding-bottom: 100px; /* tady to posune obsah o kus výš odspodu */
     box-sizing: border-box;
     min-height: 100vh;
   }
@@ -53,7 +54,6 @@
   p {
     margin: 15px 0 0 0;
     font-size: 1.2rem;
-    margin-top: auto; /* posune celý obsah nahoru, p zůstane dole */
   }
   @media (max-width: 480px) {
     h1 {
