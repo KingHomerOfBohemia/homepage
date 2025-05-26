@@ -13,45 +13,20 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between; /* horní a dolní polovina */
     align-items: center;
     text-align: center;
   }
   h1 {
     font-size: 3em;
-    margin: 0.2em 0;
-  }
-  h2 {
-    font-size: 1.5em;
-    margin-bottom: 0.2em;
-  }
-  form {
-    margin: 1em 0 2em 0;
-  }
-  input[type="text"] {
-    width: 300px;
-    max-width: 90vw;
-    padding: 0.5em;
-    font-size: 1em;
-    border: none;
-    border-radius: 3px;
-    margin: 0 0.5em 0 0;
-  }
-  input[type="submit"] {
-    background-color: red;
-    color: black;
-    border: none;
-    padding: 0.5em 1em;
-    font-size: 1em;
-    cursor: pointer;
-    border-radius: 3px;
+    margin: 0.2em 0 0.8em 0;
   }
   #rss-feed {
     width: 90%;
     max-width: 600px;
     color: red;
     font-family: monospace;
-    margin-top: 3em;
+    margin-top: 1em;
     text-align: left;
   }
   #rss-feed h2 {
@@ -71,23 +46,66 @@
   #rss-feed a:hover {
     text-decoration: underline;
   }
+
+  /* Kontejner pro vyhledávače ve spodní polovině */
+  #search-container {
+    margin-bottom: 5vh;
+  }
+
+  form {
+    margin: 0.5em 0;
+  }
+
+  input[type="text"] {
+    background-color: black;
+    color: red;
+    border: 1px solid red;
+    border-radius: 3px;
+    width: 300px;
+    max-width: 90vw;
+    padding: 0.4em 0.6em;
+    font-size: 1em;
+    font-family: monospace;
+  }
+
+  input[type="submit"] {
+    background-color: red;
+    color: black;
+    border: none;
+    padding: 0.4em 1em;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: monospace;
+    margin-left: 0.5em;
+  }
+
+  /* Odstranění bílého pozadí na focus */
+  input[type="text"]:focus {
+    outline: none;
+    background-color: black;
+    color: red;
+  }
 </style>
 </head>
 <body>
-  <h1>Tenebris Eques</h1>
-
-  <form action="https://www.google.com/search" method="GET" target="_blank" style="margin-bottom:0.5em;">
-    <input type="text" name="q" placeholder="Hledej na Google" autocomplete="off" />
-    <input type="submit" value="Google" />
-  </form>
-
-  <form action="https://duckduckgo.com/" method="GET" target="_blank">
-    <input type="text" name="q" placeholder="Hledej na DuckDuckGo" autocomplete="off" />
-    <input type="submit" value="DuckDuckGo" />
-  </form>
 
   <div id="rss-feed">
     <!-- RSS feed se načte sem -->
+  </div>
+
+  <div id="search-container">
+    <h1>Tenebris Eques</h1>
+
+    <form action="https://www.google.com/search" method="GET" target="_blank" autocomplete="off">
+      <input type="text" name="q" placeholder="Hledej na Google" />
+      <input type="submit" value="Google" />
+    </form>
+
+    <form action="https://duckduckgo.com/" method="GET" target="_blank" autocomplete="off">
+      <input type="text" name="q" placeholder="Hledej na DuckDuckGo" />
+      <input type="submit" value="DuckDuckGo" />
+    </form>
   </div>
 
 <script>
