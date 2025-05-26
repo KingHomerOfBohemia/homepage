@@ -15,17 +15,12 @@
   body {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-end; /* obsah dole */
     align-items: center;
     padding: 20px;
     padding-bottom: 100px;
     box-sizing: border-box;
     min-height: 100vh;
-  }
-  #clock {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    text-align: center;
   }
   #rss-feed {
     color: red;
@@ -99,12 +94,8 @@
 </head>
 <body>
 
-<!-- Digitální hodiny -->
-<div id="clock"></div>
-
-<!-- RSS sekce -->
 <div id="rss-feed">
-  <!-- RSS feed se sem načte -->
+  <!-- RSS feed sem -->
 </div>
 
 <h1>Tenebris Eques</h1>
@@ -122,5 +113,30 @@
 <p>Respice Finem</p>
 
 <script>
-// Digitální hodiny
-func
+const rssUrl = 'https://ct24.ceskatelevize.cz/rss';
+const rss2jsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+async function loadRSS() {
+  try {
+    const response = await fetch(rss2jsonApi);
+    const data = await response.json();
+    if(data.status === 'ok') {
+      let html = '<h2>ČT24 Hlavní události</h2><ul>';
+      data.items.slice(0,5).forEach(item => {
+        html += `<li><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></li>`;
+      });
+      html += '</ul>';
+      document.getElementById('rss-feed').innerHTML = html;
+    } else {
+      document.getElementById('rss-feed').innerText = 'Nepodařilo se načíst RSS.';
+    }
+  } catch (e) {
+    document.getElementById('rss-feed').innerText = 'Chyba při načítání RSS.';
+  }
+}
+
+loadRSS();
+</script>
+
+</body>
+</html>
