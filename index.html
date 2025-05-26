@@ -9,37 +9,25 @@
     height: 100%;
     margin: 0;
     background-color: black;
-    color: red; /* Barva textu */
+    color: red;
     font-family: monospace;
   }
   body {
     display: flex;
     flex-direction: column;
-    /* justify-content: flex-end; -- Toto je zakomentováno, aby logo bylo nahoře */
-    align-items: center; /* Centruje obsah horizontálně */
+    justify-content: flex-end; /* obsah dole */
+    align-items: center;
     padding: 20px;
-    padding-bottom: 100px; /* Dostatek místa pro scroll */
+    padding-bottom: 100px;
     box-sizing: border-box;
     min-height: 100vh;
-  }
-  #logo-container { /* Kontejner pro logo */
-    width: 100%; /* Rozprostře se přes celou šířku pro horizontální centraci */
-    text-align: center; /* Centruje obrázek uvnitř kontejneru */
-    margin-bottom: 20px; /* Mezera pod logem */
-    margin-top: 20px; /* Mezera nad logem od okraje stránky */
-  }
-  #logo { /* Styly pro samotné logo */
-    max-width: 200px; /* Maximální šířka loga */
-    height: auto; /* Zachovat poměr stran */
-    display: block; /* Důležité pro horizontální centraci 'margin: auto' */
-    margin: 0 auto; /* Centruje logo horizontálně uvnitř #logo-container */
   }
   #rss-feed {
     color: red;
     font-family: monospace;
     width: 90%;
     max-width: 600px;
-    margin: 1em auto 2em auto; /* Zajišťuje centraci RSS feedu a mezery */
+    margin: 1em auto 2em auto;
     text-align: left;
   }
   #rss-feed h2 {
@@ -106,12 +94,9 @@
 </head>
 <body>
 
-<div id="logo-container">
-  <img id="logo" src="pngegg (2) (1).png" alt="Stargate SG-1 insignia">
-</div>
-
 <div id="rss-feed">
-  </div>
+  <!-- RSS feed sem -->
+</div>
 
 <h1>Tenebris Eques</h1>
 
