@@ -3,84 +3,117 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tenebris Eques</title>
+<title>Tenebris Eques - The Homer Kingdom</title>
 <style>
-  html, body {
-    height: 100%;
-    margin: 0;
+  body {
     background-color: black;
     color: red;
-    font-family: monospace;
-  }
-  body {
+    font-family: monospace, monospace;
+    margin: 0;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* obsah dole */
+    justify-content: center;
     align-items: center;
-    padding: 20px;
-    padding-bottom: 100px; /* tady to posune obsah o kus výš odspodu */
-    box-sizing: border-box;
-    min-height: 100vh;
+    text-align: center;
   }
   h1 {
-    margin: 0 0 10px 0;
-    font-size: 2.5rem;
+    font-size: 3em;
+    margin: 0.2em 0;
+  }
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.2em;
   }
   form {
-    margin: 5px 0;
-    width: 100%;
-    max-width: 400px;
-    display: flex;
+    margin: 1em 0 2em 0;
   }
   input[type="text"] {
-    flex-grow: 1;
-    padding: 10px;
-    font-size: 1.1rem;
-    background-color: black;
-    border: 1px solid red;
-    color: red;
-    font-family: monospace;
+    width: 300px;
+    max-width: 90vw;
+    padding: 0.5em;
+    font-size: 1em;
+    border: none;
+    border-radius: 3px;
+    margin: 0 0.5em 0 0;
   }
   input[type="submit"] {
-    padding: 10px 15px;
-    margin-left: 5px;
     background-color: red;
-    border: none;
     color: black;
-    font-weight: bold;
+    border: none;
+    padding: 0.5em 1em;
+    font-size: 1em;
     cursor: pointer;
-    font-size: 1.1rem;
+    border-radius: 3px;
   }
-  p {
-    margin: 15px 0 0 0;
-    font-size: 1.2rem;
+  #rss-feed {
+    width: 90%;
+    max-width: 600px;
+    color: red;
+    font-family: monospace;
+    margin-top: 3em;
+    text-align: left;
   }
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 2rem;
-    }
-    input[type="text"], input[type="submit"] {
-      font-size: 1rem;
-      padding: 8px;
-    }
+  #rss-feed h2 {
+    margin-bottom: 0.5em;
+    text-align: center;
+  }
+  #rss-feed ul {
+    padding-left: 1em;
+  }
+  #rss-feed li {
+    margin-bottom: 0.3em;
+  }
+  #rss-feed a {
+    color: red;
+    text-decoration: none;
+  }
+  #rss-feed a:hover {
+    text-decoration: underline;
   }
 </style>
 </head>
 <body>
+  <h1>Tenebris Eques</h1>
 
-<h1>Tenebris Eques</h1>
+  <form action="https://www.google.com/search" method="GET" target="_blank" style="margin-bottom:0.5em;">
+    <input type="text" name="q" placeholder="Hledej na Google" autocomplete="off" />
+    <input type="submit" value="Google" />
+  </form>
 
-<form method="get" action="https://www.google.com/search" target="_blank">
-  <input type="text" name="q" placeholder="Hledat Google..." />
-  <input type="submit" value="Go" />
-</form>
+  <form action="https://duckduckgo.com/" method="GET" target="_blank">
+    <input type="text" name="q" placeholder="Hledej na DuckDuckGo" autocomplete="off" />
+    <input type="submit" value="DuckDuckGo" />
+  </form>
 
-<form method="get" action="https://duckduckgo.com/" target="_blank">
-  <input type="text" name="q" placeholder="Hledat DuckDuckGo..." />
-  <input type="submit" value="Go" />
-</form>
+  <div id="rss-feed">
+    <!-- RSS feed se načte sem -->
+  </div>
 
-<p>Respice Finem</p>
+<script>
+const rssUrl = 'https://ct24.ceskatelevize.cz/rss';
+const rss2jsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
+async function loadRSS() {
+  try {
+    const response = await fetch(rss2jsonApi);
+    const data = await response.json();
+    if(data.status === 'ok') {
+      let html = '<h2>ČT24 Hlavní události</h2><ul>';
+      data.items.slice(0,5).forEach(item => {
+        html += `<li><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></li>`;
+      });
+      html += '</ul>';
+      document.getElementById('rss-feed').innerHTML = html;
+    } else {
+      document.getElementById('rss-feed').innerText = 'Nepodařilo se načíst RSS.';
+    }
+  } catch (e) {
+    document.getElementById('rss-feed').innerText = 'Chyba při načítání RSS.';
+  }
+}
+
+loadRSS();
+</script>
 </body>
 </html>
