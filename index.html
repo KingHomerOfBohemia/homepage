@@ -3,110 +3,114 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tenebris Eques - The Homer Kingdom</title>
+<title>Tenebris Eques</title>
 <style>
-  body {
+  html, body {
+    height: 100%;
+    margin: 0;
     background-color: black;
     color: red;
-    font-family: monospace, monospace;
-    margin: 0;
-    height: 100vh;
+    font-family: monospace;
+  }
+  body {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* horní a dolní polovina */
+    justify-content: flex-end; /* obsah dole */
     align-items: center;
-    text-align: center;
-  }
-  h1 {
-    font-size: 3em;
-    margin: 0.2em 0 0.8em 0;
+    padding: 20px;
+    padding-bottom: 100px;
+    box-sizing: border-box;
+    min-height: 100vh;
   }
   #rss-feed {
-    width: 90%;
-    max-width: 600px;
     color: red;
     font-family: monospace;
-    margin-top: 1em;
+    width: 90%;
+    max-width: 600px;
+    margin: 1em auto 2em auto;
     text-align: left;
   }
   #rss-feed h2 {
-    margin-bottom: 0.5em;
     text-align: center;
+    margin-bottom: 0.5em;
   }
   #rss-feed ul {
     padding-left: 1em;
+    margin-top: 0;
   }
-  #rss-feed li {
+  #rss-feed ul li {
     margin-bottom: 0.3em;
   }
-  #rss-feed a {
+  #rss-feed ul li a {
     color: red;
     text-decoration: none;
   }
-  #rss-feed a:hover {
+  #rss-feed ul li a:hover {
     text-decoration: underline;
   }
-
-  /* Kontejner pro vyhledávače ve spodní polovině */
-  #search-container {
-    margin-bottom: 5vh;
+  h1 {
+    margin: 0 0 10px 0;
+    font-size: 2.5rem;
   }
-
   form {
-    margin: 0.5em 0;
+    margin: 5px 0;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
   }
-
   input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 1.1rem;
     background-color: black;
-    color: red;
     border: 1px solid red;
-    border-radius: 3px;
-    width: 300px;
-    max-width: 90vw;
-    padding: 0.4em 0.6em;
-    font-size: 1em;
-    font-family: monospace;
-  }
-
-  input[type="submit"] {
-    background-color: red;
-    color: black;
-    border: none;
-    padding: 0.4em 1em;
-    font-size: 1em;
-    cursor: pointer;
-    border-radius: 3px;
-    font-family: monospace;
-    margin-left: 0.5em;
-  }
-
-  /* Odstranění bílého pozadí na focus */
-  input[type="text"]:focus {
-    outline: none;
-    background-color: black;
     color: red;
+    font-family: monospace;
+  }
+  input[type="submit"] {
+    padding: 10px 15px;
+    margin-left: 5px;
+    background-color: red;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+  p {
+    margin: 15px 0 0 0;
+    font-size: 1.2rem;
+  }
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2rem;
+    }
+    input[type="text"], input[type="submit"] {
+      font-size: 1rem;
+      padding: 8px;
+    }
   }
 </style>
 </head>
 <body>
 
-  <div id="rss-feed">
-    <!-- RSS feed se načte sem -->
-  </div>
+<div id="rss-feed">
+  <!-- RSS feed sem -->
+</div>
 
-  <div id="search-container">
-    <h1>Tenebris Eques</h1>
+<h1>Tenebris Eques</h1>
 
-    <form action="https://www.google.com/search" method="GET" target="_blank" autocomplete="off">
-      <input type="text" name="q" placeholder="Hledej na Google" />
-      <input type="submit" value="Google" />
-    </form>
+<form method="get" action="https://www.google.com/search" target="_blank" autocomplete="off">
+  <input type="text" name="q" placeholder="Hledat Google..." />
+  <input type="submit" value="Go" />
+</form>
 
-    <form action="https://duckduckgo.com/" method="GET" target="_blank" autocomplete="off">
-      <input type="text" name="q" placeholder="Hledej na DuckDuckGo" />
-      <input type="submit" value="DuckDuckGo" />
-    </form>
-  </div>
+<form method="get" action="https://duckduckgo.com/" target="_blank" autocomplete="off">
+  <input type="text" name="q" placeholder="Hledat DuckDuckGo..." />
+  <input type="submit" value="Go" />
+</form>
+
+<p>Respice Finem</p>
 
 <script>
 const rssUrl = 'https://ct24.ceskatelevize.cz/rss';
@@ -133,5 +137,7 @@ async function loadRSS() {
 
 loadRSS();
 </script>
+
 </body>
 </html>
+
